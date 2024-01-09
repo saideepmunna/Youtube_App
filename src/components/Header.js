@@ -13,24 +13,23 @@ const Header = () => {
   const { handleSlideBar, slideBarStatus } = useSlideBar();
   return (
     <div>
-      <div className="">
+      <div>
         <div className=" flex items-center justify-between pl-4 fixed">
-          {
-            <div className="flex items-center">
-              <div
-                className="rounded-full w-12 h-12 flex justify-center items-center hover:bg-black hover:bg-opacity-5 cursor-pointer"
-                onClick={handleSlideBar}
-              >
-                <FontAwesomeIcon icon={faBars} className="text-xl" />
-              </div>
-              <div className="w-32">
-                <img
-                  src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg"
-                  alt="YT_logo"
-                />
-              </div>
+          <div className="flex items-center">
+            <div
+              className="rounded-full w-12 h-12 flex justify-center items-center hover:bg-black hover:bg-opacity-5 cursor-pointer"
+              onClick={handleSlideBar}
+            >
+              <FontAwesomeIcon icon={faBars} className="text-xl" />
             </div>
-          }
+            <div className="w-32">
+              <img
+                src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg"
+                alt="YT_logo"
+              />
+            </div>
+          </div>
+
           <div>
             <div className="flex items-center ml-28">
               <input
@@ -46,7 +45,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center ml-32">
             <div className="m-7">
               <FontAwesomeIcon icon={faBell} className="text-xl" />
             </div>
@@ -57,8 +56,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <MenuList/>
-  
+      <MenuList />
     </div>
   );
 };
