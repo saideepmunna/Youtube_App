@@ -4,7 +4,7 @@ import MenuList from './MenuList';
 const SideBar = () => {
   return (
     <div>
-        <MenuList/>
+       <MenuList/> 
     </div>
   )
 }

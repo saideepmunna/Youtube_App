@@ -3,11 +3,11 @@ import { toggleSlicebar } from "../utils/slideBarSlice";
 
 const useSlideBar = () => {
   const dispatch = useDispatch();
-  const slideBarStatus = useSelector((store) => store.slideBar?.slideBarState);
+  const slideBarStatus = useSelector((store) => store.slideBar?.slideBarState) || false;
   const handleSlideBar = () => {
     dispatch(toggleSlicebar(!slideBarStatus));
   };
-  return handleSlideBar;
+  return {handleSlideBar,slideBarStatus};
 };
 
 export default useSlideBar;

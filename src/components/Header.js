@@ -6,28 +6,31 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleSlicebar } from "../utils/slideBarSlice";
 import useSlideBar from "../Hooks/useSlideBar";
+import MenuList from "./MenuList";
 
 const Header = () => {
-  const handleSlideBar = useSlideBar()
+  const { handleSlideBar, slideBarStatus } = useSlideBar();
   return (
     <div>
-      <div className="flex justify-between items-center pl-3 pr-8">
-        <div className=" flex items-center ">
-          <div
-            className="rounded-full w-12 h-12 flex justify-center items-center hover:bg-black hover:bg-opacity-5 cursor-pointer"
-            onClick={handleSlideBar}
-          >
-            <FontAwesomeIcon icon={faBars} className="text-xl" />
-          </div>
-          <div className="w-32">
-            <img
-              src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg"
-              alt="YT_logo"
-            />
-          </div>
+      <div className="">
+        <div className=" flex items-center justify-between pl-4 fixed">
+          {
+            <div className="flex items-center">
+              <div
+                className="rounded-full w-12 h-12 flex justify-center items-center hover:bg-black hover:bg-opacity-5 cursor-pointer"
+                onClick={handleSlideBar}
+              >
+                <FontAwesomeIcon icon={faBars} className="text-xl" />
+              </div>
+              <div className="w-32">
+                <img
+                  src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg"
+                  alt="YT_logo"
+                />
+              </div>
+            </div>
+          }
           <div>
             <div className="flex items-center ml-28">
               <input
@@ -43,17 +46,19 @@ const Header = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex items-center">
-          <div className="m-7">
-            <FontAwesomeIcon icon={faBell} className="text-xl" />
-          </div>
+          <div className="flex items-center">
+            <div className="m-7">
+              <FontAwesomeIcon icon={faBell} className="text-xl" />
+            </div>
 
-          <div className="h-9 w-9  flex justify-center items-center rounded-full bg-purple-400">
-            <FontAwesomeIcon icon={faUser} />
+            <div className="h-9 w-9  flex justify-center items-center rounded-full bg-purple-400">
+              <FontAwesomeIcon icon={faUser} />
+            </div>
           </div>
         </div>
       </div>
+      <MenuList/>
+  
     </div>
   );
 };
