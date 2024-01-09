@@ -5,10 +5,10 @@ import VideoContainer from "./VideoContainer";
 const MainContainer = () => {
   return (
     <div>
-      <h1 className="pl-24">
+      <div className="pl-28 -m-3 w-full">
         <ButtonList />
         <VideoContainer />
-      </h1>
+      </div>
     </div>
   );
 };
