@@ -14,7 +14,7 @@ const VideoCard = ({info}) => {
         </div>
         <p className="font-semibold text-medium">{title}</p>
         <p className="text-black opacity-90 text-sm">{channelTitle}</p>
-        <p className="text-black opacity-90 text-sm">{ viewCount>=1000000 ? (viewCount/1000000).toFixed(1) + "M views" : viewCount}</p>
+        <p className="text-black opacity-90 text-sm">{ viewCount>=1000000 ? (viewCount/1000000).toFixed(1) + "M views" : Math.floor(viewCount/1000)+"K views"}</p>
 
       </div>
 
