@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <div>
       <div>
-        <div className=" flex items-center justify-between pl-4 fixed">
+        <div className=" flex items-center justify-between pl-4 fixed z-50 bg-white w-full">
           <div className="flex items-center">
             <div
               className="rounded-full w-12 h-12 flex justify-center items-center hover:bg-black hover:bg-opacity-5 cursor-pointer"
@@ -45,7 +45,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center ml-32">
+          <div className="flex items-center ml-32 mr-7">
             <div className="m-7">
               <FontAwesomeIcon icon={faBell} className="text-xl" />
             </div>
