@@ -10,7 +10,7 @@ const MenuList = () => {
     <div>
       {slideBarStatus && (
         <div className="w-52 ">
-          <div className="flex items-center fixed z-10 bg-white pt-2 px-3">
+          <div className="flex items-center bg-white pt-2">
             <div
               className="rounded-full w-12 h-12 flex justify-center items-center hover:bg-black hover:bg-opacity-5 cursor-pointer"
               onClick={handleSlideBar}

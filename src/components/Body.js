@@ -1,22 +1,14 @@
-import React from 'react'
-import MainContainer from './MainContainer';
-import SideMenu from './SideMenu';
-
+import React from "react";
+import MainContainer from "./MainContainer";
+import SideMenu from "./SideMenu";
 
 const Body = () => {
-
   return (
     <div>
-      <div>
-      <SideMenu/>
-      <MainContainer/> 
-      </div>
-      
-      
-      
-
+      <SideMenu />
+      <MainContainer />
     </div>
-  )
-}
+  );
+};
 
 export default Body;

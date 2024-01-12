@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useSlideBar from "../Hooks/useSlideBar";
-import MenuList from "./MenuList";
+import { Link, Outlet } from "react-router-dom";
 
 const Header = () => {
   const { handleSlideBar, slideBarStatus } = useSlideBar();
@@ -22,12 +22,17 @@ const Header = () => {
             >
               <FontAwesomeIcon icon={faBars} className="text-xl" />
             </div>
-            <div className="w-32">
-              <img
-                src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg"
-                alt="YT_logo"
-              />
-            </div>
+            <Link to={"/"}>
+              <div className="w-32">
+                <img
+                  src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg"
+                  alt="YT_logo"
+                />
+               
+              </div>
+            </Link>
+              
+            
           </div>
 
           <div>
@@ -56,7 +61,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <MenuList />
+      <Outlet/>
     </div>
   );
 };
