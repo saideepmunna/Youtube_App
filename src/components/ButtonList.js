@@ -22,7 +22,7 @@ const ButtonList = () => {
   ];
 
   return (
-    <div className="flex overflow-x-scroll no-scrollbar fixed w-screen bg-white -mt-20 pt-6 pb-3 z-20">
+    <div className="flex overflow-x-scroll no-scrollbar fixed w-screen bg-white -mt-20 pt-7 pb-3 z-20">
       {buttonList.map((buttonName) => (
         <Button key={buttonName} name={buttonName} />
       ))}

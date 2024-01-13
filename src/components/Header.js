@@ -14,6 +14,7 @@ const Header = () => {
   const { handleSlideBar, slideBarStatus } = useSlideBar();
   const [searchInput, setSearchInput] = useState("");
   const [videoSuggestions, setVideoSuggestions] = useState([]);
+  const [displaySearchBox, setDisplaySearchBox] = useState(false);
 
   // console.log(videoSuggestions);
   const fetchVideoSuggestions = async () => {
@@ -66,22 +67,26 @@ const Header = () => {
                   onChange={(e) => {
                     setSearchInput(e.target.value);
                   }}
+                  onFocus={()=>setDisplaySearchBox(true)}
+                  onBlur={()=>{setDisplaySearchBox(false)}}
                 />
-                <div className="fixed bg-white border border-gray-300 border-t-0 rounded-xl mt-[2px] w-[545px] py-5">
-                  <ul>
-                    {videoSuggestions.map((suggestion) => (
-                      <li className="flex items-center px-5 py-[4px] hover:bg-gray-100 cursor-default">
-                        <div className="">
-                          <FontAwesomeIcon
-                            icon={faMagnifyingGlass}
-                            className="font-light"
-                          />
-                        </div>
-                        <p className="pl-4 font-medium">{suggestion}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {(displaySearchBox && videoSuggestions.length>0) && (
+                  <div className="fixed bg-white border border-gray-300 border-t-0 rounded-xl mt-[2px] w-[545px] py-5">
+                    <ul>
+                      {videoSuggestions.map((suggestion) => (
+                        <li className="flex items-center px-5 py-[4px] hover:bg-gray-100 cursor-default">
+                          <div className="">
+                            <FontAwesomeIcon
+                              icon={faMagnifyingGlass}
+                              className="font-light"
+                            />
+                          </div>
+                          <p className="pl-4 font-medium">{suggestion}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
               <div className="px-6 bg-black bg-opacity-5 py-2 rounded-e-full border border-black border-opacity-20 cursor-pointer">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
