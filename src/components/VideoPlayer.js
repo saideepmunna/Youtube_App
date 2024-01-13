@@ -7,11 +7,11 @@ const VideoPlayer = () => {
   const videoId = searchParams.get("v")
   return (
     <div>
-        <div className="pt-24 pl-28">
+        <div>
       <iframe
         className="rounded-xl"
-        width="630"
-        height="360"
+        width="625"
+        height="355"
         src={"https://www.youtube.com/embed/"+ videoId+"?autoplay=1&rel=0"}
         title="YouTube video player"
         frameBorder="0"

@@ -2,7 +2,7 @@ import React from 'react'
 
 const VideoSuggestions = () => {
   return (
-    <div className="pt-24">VideoSuggestions</div>
+    <div className="pl-9">VideoSuggestions</div>
   )
 }
 

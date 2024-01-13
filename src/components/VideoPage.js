@@ -7,13 +7,13 @@ import VideoDetails from "./VideoDetails";
 const VideoPage = () => {
   // console.log(searchParams);
   return (
-    <div className="flex">
-      <div>
+    <div className="px-[102px] flex pt-[90px]">
+      <div className="w-7/12">
       <VideoPlayer />
       <VideoDetails />
       </div>
-      <div>
-      <VideoSuggestions />
+      <div className="w-5/12">
+      <VideoSuggestions  />
 
       </div>
     </div>
