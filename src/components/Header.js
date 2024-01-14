@@ -9,12 +9,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useSlideBar from "../Hooks/useSlideBar";
 import { Link, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cacheSearchResults } from "../utils/searchSlice";
 
 const Header = () => {
   const { handleSlideBar, slideBarStatus } = useSlideBar();
   const [searchInput, setSearchInput] = useState("");
   const [videoSuggestions, setVideoSuggestions] = useState([]);
   const [displaySearchBox, setDisplaySearchBox] = useState(false);
+  const dispatch = useDispatch();
+  const cacheResults = useSelector((store) => store.search);
 
   // console.log(videoSuggestions);
   const fetchVideoSuggestions = async () => {
@@ -25,12 +29,23 @@ const Header = () => {
     const json = await data.json();
     // console.log(json[1]);
     setVideoSuggestions(json[1]);
+    dispatch(cacheSearchResults({ [searchInput]: json[1] }));
   };
 
   useEffect(() => {
+    // Set a timer to delay the execution of fetchVideoSuggestions by 200 milliseconds
     const timer = setTimeout(() => {
-      fetchVideoSuggestions();
+      if (cacheResults[searchInput]) {
+        // Don't make an API call when you find searchInput in reduc cacheResults
+        setVideoSuggestions(cacheResults[searchInput]);
+      } else {
+        console.log("API CALL - " + searchInput);
+        fetchVideoSuggestions();
+      }
     }, 200);
+
+    // Set a timer to delay the execution of fetchVideoSuggestions by 200 milliseconds
+
     return () => clearTimeout(timer);
   }, [searchInput]);
 
@@ -39,10 +54,7 @@ const Header = () => {
       <div>
         <div className=" flex items-center justify-between pl-4 fixed z-50 bg-white w-full h-16">
           <div className="flex items-center">
-            <div
-              className="rounded-full w-12 h-12 flex justify-center items-center hover:bg-black hover:bg-opacity-5 cursor-pointer"
-              onClick={handleSlideBar}
-            >
+            <div className="rounded-full w-12 h-12 flex justify-center items-center hover:bg-black hover:bg-opacity-5 cursor-pointer">
               <FontAwesomeIcon icon={faBars} className="text-xl" />
             </div>
             <Link to={"/"}>
@@ -67,14 +79,19 @@ const Header = () => {
                   onChange={(e) => {
                     setSearchInput(e.target.value);
                   }}
-                  onFocus={()=>setDisplaySearchBox(true)}
-                  onBlur={()=>{setDisplaySearchBox(false)}}
+                  onFocus={() => setDisplaySearchBox(true)}
+                  onBlur={() => {
+                    setDisplaySearchBox(false);
+                  }}
                 />
-                {(displaySearchBox && videoSuggestions.length>0) && (
+                {displaySearchBox && videoSuggestions?.length > 0 && (
                   <div className="fixed bg-white border border-gray-300 border-t-0 rounded-xl mt-[2px] w-[545px] py-5">
                     <ul>
                       {videoSuggestions.map((suggestion) => (
-                        <li className="flex items-center px-5 py-[4px] hover:bg-gray-100 cursor-default">
+                        <li
+                          key={suggestion}
+                          className="flex items-center px-5 py-[4px] hover:bg-gray-100 cursor-default"
+                        >
                           <div className="">
                             <FontAwesomeIcon
                               icon={faMagnifyingGlass}
