@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { YOUTUBE_VIDEOS_API } from "../utils/constants";
+import { API_KEY, YOUTUBE_VIDEOS_API } from "../utils/constants";
 import { updateVideoCards } from "../utils/videosSlice";
 import { useEffect } from "react";
 

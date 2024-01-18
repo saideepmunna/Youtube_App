@@ -11,6 +11,8 @@ import { Link, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cacheSearchResults } from "../utils/searchSlice";
+import { API_KEY } from "../utils/constants";
+import { setSearchResults } from "../utils/searchResultsSlice";
 
 const Header = () => {
   const { handleSlideBar, slideBarStatus } = useSlideBar();
@@ -49,6 +51,17 @@ const Header = () => {
     return () => clearTimeout(timer);
   }, [searchInput]);
 
+  const fetchSearchResults = async (suggestion) => {
+    setDisplaySearchBox(false);
+
+    const data = await fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=s${suggestion}&key=${API_KEY}`
+    );
+    const json = await data.json();
+    dispatch(setSearchResults(json.items));
+    console.log(json);
+  };
+
   return (
     <div>
       <div>
@@ -70,7 +83,15 @@ const Header = () => {
 
           <div>
             <div className="flex items-center ml-28">
-              <div className="">
+              <div
+                className=""
+                onFocus={() => setDisplaySearchBox(true)}
+                onBlur={() =>
+                  setTimeout(() => {
+                    setDisplaySearchBox(false);
+                  }, 300)
+                }
+              >
                 <input
                   type="text"
                   placeholder="Search"
@@ -79,35 +100,44 @@ const Header = () => {
                   onChange={(e) => {
                     setSearchInput(e.target.value);
                   }}
-                  onFocus={() => setDisplaySearchBox(true)}
-                  onBlur={() => {
-                    setDisplaySearchBox(false);
-                  }}
                 />
                 {displaySearchBox && videoSuggestions?.length > 0 && (
                   <div className="fixed bg-white border border-gray-300 border-t-0 rounded-xl mt-[2px] w-[545px] py-5">
                     <ul>
                       {videoSuggestions.map((suggestion) => (
-                        <li
-                          key={suggestion}
-                          className="flex items-center px-5 py-[4px] hover:bg-gray-100 cursor-default"
-                        >
-                          <div className="">
-                            <FontAwesomeIcon
-                              icon={faMagnifyingGlass}
-                              className="font-light"
-                            />
-                          </div>
-                          <p className="pl-4 font-medium">{suggestion}</p>
-                        </li>
+                        <Link to={"/results?search_query=" + suggestion}>
+                          <li
+                            key={suggestion}
+                            className="flex items-center px-5 py-[4px] hover:bg-gray-100 cursor-default"
+                            onClick={() => {
+                              fetchSearchResults(suggestion);
+                            }}
+                          >
+                            <div className="">
+                              <FontAwesomeIcon
+                                icon={faMagnifyingGlass}
+                                className="font-light"
+                              />
+                            </div>
+                            <p className="pl-4 font-medium">{suggestion}</p>
+                          </li>
+                        </Link>
                       ))}
                     </ul>
                   </div>
                 )}
               </div>
-              <div className="px-6 bg-black bg-opacity-5 py-2 rounded-e-full border border-black border-opacity-20 cursor-pointer">
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </div>
+              <Link to={"/results?search_query=" + searchInput}>
+                <button
+                  className="px-6 bg-black bg-opacity-5 py-2 rounded-e-full border border-black border-opacity-20 cursor-pointer"
+                  onClick={() => {
+                    fetchSearchResults(searchInput);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+              </Link>
+
               <div className=" bg-black bg-opacity-5 rounded-full w-10 h-10 flex justify-center items-center m-4 ">
                 <FontAwesomeIcon icon={faMicrophone} />
               </div>

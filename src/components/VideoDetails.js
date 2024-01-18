@@ -79,6 +79,7 @@ const VideoDetails = () => {
           </div>}
          <p onClick={()=>{setShowDisplay(!showDisplay)}} className="text-sm font-semibold mt-1 cursor-pointer hover:bg-black hover:bg-opacity-10 p-1 rounded-lg w-fit">{showDisplay?"show less": "...more"}</p>
       </div>
+      <h1 className="font-bold my-3 text-xl">Comments</h1>
       <CommentsContainer/>
     </div>
   );
