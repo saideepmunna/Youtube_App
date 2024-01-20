@@ -10,10 +10,9 @@ import useFetchVideos from "../Hooks/useFetchVideos";
 const VideoContainer = () => {
   // const [ytVideos, setYtVideos] = useState(null);
 
-  const ytVideos = useSelector(store=>store.videosList.videoCards)
+  const ytVideos = useSelector(store=>store?.videosList?.videoCards)
   useFetchVideos();
   if (ytVideos === null) return <Shimmer />;
-  else
     return (
       <div className="mt-10 pt-3 ml-4  grid grid-cols-3 gap-x-4 gap-y-8">
         {ytVideos.map((video) => (

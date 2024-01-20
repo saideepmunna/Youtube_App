@@ -6,28 +6,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import useFetchVideos from "../Hooks/useFetchVideos";
-import { useSearchParams } from "react-router-dom";
 import CommentsContainer from "./CommentsContainer";
 
-const VideoDetails = () => {
-  useFetchVideos();
-  // const videoId = useSelector(store=>store?.videosList?.videoId);
-  const videoList = useSelector((store) => store?.videosList?.videoCards);
-  const [searchParams] = useSearchParams();
+const VideoDetails = ({videoInfo}) => {
+  const { id, snippet, statistics } = videoInfo[0];
   const [showDisplay, setShowDisplay] = useState(false)
+  if(!videoInfo) return;
 
-  if (videoList === null) return;
-
-  const paramsVideoId = searchParams.get("v");
-
-  const currentVideo = videoList.filter((video) => video.id === paramsVideoId);
-  const { snippet, statistics } = currentVideo[0];
-
-  console.log(currentVideo);
-
-  // console.log(videoId);
   return (
     <div className="py-2">
       <div className="font-bold text-xl">{snippet?.title}</div>

@@ -11,8 +11,7 @@ import { Link, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cacheSearchResults } from "../utils/searchSlice";
-import { API_KEY } from "../utils/constants";
-import { setSearchResults } from "../utils/searchResultsSlice";
+
 
 const Header = () => {
   const { handleSlideBar, slideBarStatus } = useSlideBar();
@@ -51,16 +50,7 @@ const Header = () => {
     return () => clearTimeout(timer);
   }, [searchInput]);
 
-  const fetchSearchResults = async (suggestion) => {
-    setDisplaySearchBox(false);
-
-    const data = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=s${suggestion}&key=${API_KEY}`
-    );
-    const json = await data.json();
-    dispatch(setSearchResults(json.items));
-    console.log(json);
-  };
+  
 
   return (
     <div>
@@ -105,13 +95,11 @@ const Header = () => {
                   <div className="fixed bg-white border border-gray-300 border-t-0 rounded-xl mt-[2px] w-[545px] py-5">
                     <ul>
                       {videoSuggestions.map((suggestion) => (
-                        <Link to={"/results?search_query=" + suggestion}>
+                        <Link to={"/results?search_query=" + suggestion} key={suggestion}>
                           <li
-                            key={suggestion}
+                            
                             className="flex items-center px-5 py-[4px] hover:bg-gray-100 cursor-default"
-                            onClick={() => {
-                              fetchSearchResults(suggestion);
-                            }}
+                
                           >
                             <div className="">
                               <FontAwesomeIcon
@@ -130,9 +118,7 @@ const Header = () => {
               <Link to={"/results?search_query=" + searchInput}>
                 <button
                   className="px-6 bg-black bg-opacity-5 py-2 rounded-e-full border border-black border-opacity-20 cursor-pointer"
-                  onClick={() => {
-                    fetchSearchResults(searchInput);
-                  }}
+                 
                 >
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>

@@ -132,7 +132,7 @@ const Comment = ({ info }) => {
 };
 
 const CommentsList = ({ comments }) => {
-  console.log(comments)
+  // console.log(comments)
   return (
     <div>
       <div>
