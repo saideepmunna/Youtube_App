@@ -4,7 +4,7 @@ import { API_KEY } from "../utils/constants";
 
 const VideoResultCard = ({ card }) => {
 //   console.log(card);
-  const [videoStatistics, setVideoStatistics] = useState("")
+  const [videoStatistics, setVideoStatistics] = useState([])
   const { id, snippet  } = card;
   const { channelTitle, description, thumbnails, title } = snippet;
 //   const {viewCount} = statistics;
@@ -18,7 +18,7 @@ const fetchStatistics = async()=>{
    useEffect(()=>{
     fetchStatistics()
    },[])
-  if(videoStatistics==="") return null;
+   if (!videoStatistics.length || !videoStatistics[0].statistics) return null;
   return (
     <div className="mx-28 py-2" >
       <div className="flex">
