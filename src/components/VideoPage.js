@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import VideoPlayer from "./VideoPlayer";
-import VideoSuggestions from "./VideoSuggestions";
 import VideoDetails from "./VideoDetails";
 import { useSearchParams } from 'react-router-dom';
 import { API_KEY } from "../utils/constants";
+import LiveChat from "./LiveChat";
 
 
 const VideoPage = () => {
@@ -31,7 +31,7 @@ const VideoPage = () => {
       <VideoDetails videoInfo={videoDetails}/>
       </div>
       <div className="w-5/12">
-      <VideoSuggestions  />
+      <LiveChat  />
 
       </div>
     </div>

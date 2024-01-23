@@ -136,7 +136,7 @@ const CommentsList = ({ comments }) => {
   return (
     <div>
       <div>
-        {comments.map((comment) => (
+        {comments.map((comment, i) => (
           <div>
             <Comment info={comment} />
             <div className="border-black border-l-2 pl-5 ml-3">
