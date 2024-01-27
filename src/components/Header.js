@@ -24,7 +24,7 @@ const Header = () => {
   // console.log(videoSuggestions);
   const fetchVideoSuggestions = async () => {
     const data = await fetch(
-      "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" +
+      "http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&client=firefox&q=" +
         searchInput
     );
     const json = await data.json();
